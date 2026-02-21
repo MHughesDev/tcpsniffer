@@ -35,8 +35,14 @@ await sniffer.stop();
 
 ## Installation
 
-- **TypeScript/Node:** `npm install tcp-sniffer` and `npm run build` (or use the built `dist/` from the repo).
-- **Native addon (for real capture):** The sniffer uses a C++ N-API addon that depends on **libpcap**. Build it on a **Linux** host with node-gyp and libpcap installed (e.g. `libpcap-dev`). From the repo root: `npm run build:native`. Without this step, the sniffer uses a mock engine and will not capture real traffic. There is no prebuilt binary distribution; consumers on Linux must build the addon (or use the container image for sidecar deployment).
+```bash
+npm install tcp-sniffer
+```
+
+That’s all you need. The package builds TypeScript and the native addon automatically on install.
+
+- **Real packet capture (Linux):** Install **libpcap** and build tools so the native addon can compile (e.g. `sudo apt install libpcap-dev build-essential` on Debian/Ubuntu). If the addon fails to build, the package still installs and uses a mock engine.
+- **Non-Linux or no libpcap:** The library runs with a mock engine (no real capture; useful for tests and dev).
 
 ## What it is
 
