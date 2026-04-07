@@ -124,12 +124,21 @@ describe('Shutdown / drain', () => {
     let stderr = '';
     child.stderr?.on('data', (c) => { stderr += c.toString(); });
     child.stdout?.on('data', () => {});
-    await new Promise((r) => setTimeout(r, 200));
-    child.kill('SIGTERM');
-    const exit = await new Promise<number | null>((resolve) => {
-      child.on('exit', (code) => resolve(code ?? null));
-      setTimeout(() => resolve(null), 5000);
+    const exitPromise = new Promise<number | null>((resolve, reject) => {
+      child.once('error', reject);
+      child.once('exit', (code) => resolve(code ?? null));
     });
+    await new Promise((r) => setTimeout(r, 200));
+    if (child.exitCode === null) {
+      child.kill('SIGTERM');
+    }
+    const exit = await Promise.race([
+      exitPromise,
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000)),
+    ]);
+    if (exit === null) {
+      child.kill('SIGKILL');
+    }
     assert.equal(exit, 0, 'expected exit 0 after SIGTERM; stderr: ' + stderr.slice(-500));
   });
 });
