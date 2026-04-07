@@ -4,8 +4,8 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { validateConfig, ValidationError, hasOutputConfigured } from './validation.js';
-import { CONTRACT_DEFAULTS } from './constants.js';
+import { validateConfig, ValidationError, hasOutputConfigured } from '../../validation.js';
+import { CONTRACT_DEFAULTS } from '../../constants.js';
 
 describe('validateConfig', () => {
   it('accepts minimal valid config (ports only) and applies defaults', () => {

@@ -5,8 +5,8 @@
 
 import { describe, it, mock, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { deliverMessage } from './output.js';
-import type { HttpMessage } from './types.js';
+import { deliverMessage } from '../../output.js';
+import type { HttpMessage } from '../../types.js';
 
 const fixtureMessage: HttpMessage = {
   receiver: { ip: '10.0.0.1', port: 8080 },

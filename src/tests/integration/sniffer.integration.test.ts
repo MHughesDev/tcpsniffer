@@ -8,8 +8,8 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createSniffer } from './sniffer.js';
-import type { HttpMessage } from './types.js';
+import { createSniffer } from '../../sniffer.js';
+import type { HttpMessage } from '../../types.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -116,7 +116,7 @@ describe('Shutdown / drain', () => {
   });
 
   it('entrypoint exits 0 on SIGTERM (graceful shutdown)', { skip: process.platform === 'win32' }, async () => {
-    const entrypointPath = path.resolve(__dirname, 'entrypoint.js');
+    const entrypointPath = path.resolve(__dirname, '../../entrypoint.js');
     const child = spawn(process.execPath, [entrypointPath], {
       env: { ...process.env, PORTS: '8080' },
       stdio: ['ignore', 'pipe', 'pipe'],

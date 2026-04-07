@@ -8,8 +8,8 @@ import {
   redactSensitiveHeaders,
   deliverMessage,
   DEFAULT_REDACT_HEADERS,
-} from './output.js';
-import type { HttpMessage } from './types.js';
+} from '../../output.js';
+import type { HttpMessage } from '../../types.js';
 
 const fixtureMessage: HttpMessage = {
   receiver: { ip: '10.0.0.1', port: 8080 },

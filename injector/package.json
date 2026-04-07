@@ -7,8 +7,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "node --test dist/",
-    "test:ts": "tsc && node --test dist/"
+    "test": "node --test dist/tests",
+    "test:ts": "tsc && node --test dist/tests",
+    "test:unit": "tsc && node --test dist/tests/unit"
   },
   "engines": {
     "node": ">=18"
