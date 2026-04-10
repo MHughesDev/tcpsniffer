@@ -5,8 +5,8 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { handleAdmissionReview } from './handler.js';
-import { DEFAULT_INJECTOR_OPTIONS } from './types.js';
+import { handleAdmissionReview } from '../../handler.js';
+import { DEFAULT_INJECTOR_OPTIONS } from '../../types.js';
 
 const validRequestUid = '705ab4f5-6393-11e8-b7cc-42010a800002';
 

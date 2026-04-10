@@ -44,6 +44,30 @@ That’s all you need. The package builds TypeScript and the native addon automa
 - **Real packet capture (Linux):** Install **libpcap** and build tools so the native addon can compile (e.g. `sudo apt install libpcap-dev build-essential` on Debian/Ubuntu). If the addon fails to build, the package still installs and uses a mock engine.
 - **Non-Linux or no libpcap:** The library runs with a mock engine (no real capture; useful for tests and dev).
 
+## Local environment setup (repo)
+
+From the repository root:
+
+```bash
+npm install
+cp .env.example .env
+```
+
+Optional native capture prerequisites (Linux):
+
+```bash
+sudo apt-get update
+sudo apt-get install -y build-essential libpcap-dev
+```
+
+For the injector workspace:
+
+```bash
+cd injector
+npm install
+cp .env.example .env
+```
+
 ## What it is
 
 - **TypeScript library** with a **C++ engine** (N-API addon) for packet capture, TCP reassembly, and HTTP parsing.
@@ -68,6 +92,9 @@ Without `build:native`, the sniffer falls back to a mock engine (useful for test
 ```bash
 npm run test:ts        # Compile and run all tests
 npm run test           # Run tests (assumes already built)
+npm run test:unit      # Unit tests only
+npm run test:integration # Integration tests only
+npm run test:e2e       # Optional e2e smoke checks
 ```
 
 Tests include unit tests (validation, sniffer lifecycle, output pipeline, injector webhook patch shape), integration tests (message shape, callback/stdout/outputUrl, validation including production HTTPS), and shutdown tests (drain on stop, entrypoint SIGTERM exit 0). Optional E2E against a real cluster is described in [docs/testing/E2E.md](docs/testing/E2E.md).
